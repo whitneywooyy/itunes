@@ -14,6 +14,7 @@ app.controller('mainCtrl', function($scope, itunesService){
         {field: 'Collection', displayName: 'Collection'},
         {field: 'AlbumArt', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
         {field: 'Type', displayName: 'Type'},
+        {field: 'Length', displayName: 'Length'},
         {field: 'CollectionPrice', displayName: 'Collection Price'},
       ]
   };
@@ -31,11 +32,15 @@ app.controller('mainCtrl', function($scope, itunesService){
     
     //Code here
 
+    $scope.getSongData = function(){
+      itunesService.searchTerm($scope.artist).then(function(dataFromService){
+        console.log(dataFromService);
+        $scope.songData = dataFromService;
 
-  //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
+      });
+    }
 
-    //Code here
-
+        //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
 
   //If everything worked you should see a huge array of objects inside your console. That's great! But unfortunately that's not what ng-grid is expecting. What you need to do now
   //is sort the data you got back to be an object in the following format.
@@ -50,12 +55,17 @@ app.controller('mainCtrl', function($scope, itunesService){
   //the iTunes API is going to give you a lot more details than ng-grid wants. Create a new array and then loop through the iTunes data pushing into your new array objects that look like the above data.
 
     //Code here
-
+  
 
   //Once you have that final data array, you simply need to put it on the scope (or more specifically on the scope as songData). Once you do this ($scope.songData = myFinalArray) then ng-grid will see that and populate the page.
 
     //Code here
-});
+
+
+
+
+
+}); // end app.controller
 
 
 

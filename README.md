@@ -22,16 +22,19 @@ The concepts this project will cover are
 * Examine the codebase. Like the ChatRoom project, the index.html page is already built for you. Your main goal is to fill in mainCtrl.js and itunesService.js
 * If you're feeling adventurous, feel free to change the CSS how you would like.
 * Head over to http://angular-ui.github.io/ng-grid/ and check out the examples there. We will be using ng-grid to display the data we get from iTunes. Although all this code will already be in place for you, it's a good idea to get familiar with ng-grid so you know exactly what that code is doing.
+// DONE
 
 
 ##Step 2: Build your itunesService
 * In Angular we use 'services' to outsource some of our heavy lifting. That's exactly what we're going to do when we call the iTunes API.
 * Open up itunesService.js and read the instructions. The bigger picture is that this service is going to have a method which takes in an artist name as the parameter, then uses a JSONP http request to call the iTunes API and retrieve the data about that specific artist.
+// DONE
 
 
 ##Step 3: Tie in your Controller
 * Now that your itunesService is finished, we somehow need a way to tie the data we're getting from itunesService to our view (index.html)
 * Go to mainCtrl.js and follow the instructions in order to get the itunes data from your service to your view
+// DONE
 
 
 ##Step 4: Add More Options

@@ -10,4 +10,47 @@ app.service('itunesService', function($http, $q){
   //You can return the http request or you can make your own promise in order to manipulate the data before you resolve it.
 
     //Code here
-});
+
+    // this.searchTerm = function(artist){
+    // 	var dfd = $q.defer();
+    // 	$http({
+    // 		method: "JSONP",
+    // 		url: "https://itunes.apple.com/search?term=" + artist + "&callback=JSON_CALLBACK"
+    // 	}).then(function(response){
+    // 		console.log(response);
+    // 		var parsedResponse = response.data.results.artistName;
+    // 		dfd = resolve(parsedResponse);
+    // 	})
+    // };
+
+    this.searchTerm = function(artist) {
+    	var dfd = $q.defer();
+    	$http({
+    		method: "JSONP",
+    		url: "https://itunes.apple.com/search?term=" + artist + "&callback=JSON_CALLBACK"
+    	}).then(function(response){
+    		var parsedResponse = response.data.results;
+    		console.log(parsedResponse);
+    		var newParsedResponse = [];
+    		for (var i = 0; i < parsedResponse.length; i++) {
+    			var newObj = {
+    				AlbumArt: parsedResponse[i].artworkUrl100,
+    				Artist: parsedResponse[i].artistName,
+    				Collection: parsedResponse[i].collectionName,
+    				CollectionPrice: "$" + parsedResponse[i].collectionPrice,
+    				Play: parsedResponse[i].trackViewUrl,
+    				Type: parsedResponse[i].kind,
+    				// Length: Math.floor((parsedResponse[i].trackTimeMillis / (1000 * 60)) + ":")
+    				Length: parsedResponse[i].trackTimeMillis
+    			};
+    			newParsedResponse.push(newObj);
+    			// console.log(newObj);
+    		}
+
+    		dfd.resolve(newParsedResponse);
+    	});
+    	
+    	return dfd.promise;
+    };
+
+});	// end app.service
